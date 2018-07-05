@@ -1,0 +1,24 @@
+{
+  "name": "maius-template",
+  "version": "0.0.1",
+  "description": "Maius app template",
+  "main": "app.js",
+  "dependencies": {
+    "koa-bodyparser": "^4.2.1",
+    "maius": "^0.0.1"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maiusjs/maius-template.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/maiusjs/maius-template/issues"
+  },
+  "homepage": "https://github.com/maiusjs/maius-template#readme"
+}
