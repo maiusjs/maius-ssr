@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+
+require('babel-register')({
+  presets: [
+    ['env', {
+      targets: {
+        node: '8',
+      },
+    }],
+    'react',
+    'stage-2',
+  ],
+  plugins: [
+    [
+      'transform-runtime',
+      {
+        polyfill: false,
+        regenerator: true,
+      },
+    ],
+    [
+      'babel-plugin-transform-require-ignore', {
+        extensions: ['.css', '.less', '.sass', '.scss'],
+      },
+    ],
+  ],
+  extensions: ['.jsx', '.js'],
+});
+
+const path = require('path');
+const Maius = require('maius');
+
+const PORT = 3123;
+
+const app = new Maius({
+  rootDir: path.resolve(__dirname, '../server'),
+  port: PORT,
+});
+
+app.listen().then(() => {
+  console.log(`APP Started, http://localhost:${PORT}`);
+});

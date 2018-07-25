@@ -1,19 +1,19 @@
 # maius-template
-Maius app template
+
+Maius React ssr template.
 
 
 ### Usage
 
-It's just a template for starup maius app used by *maius-cli*.
-
+run in development mode
 
 ```bash
-npm i -g maius-cli
-maius init project-name
-
-cd project-name
-npm i
-npm start
+npm run dev
 ```
 
-EOF.
+run in production mode 
+
+```bash
+npm run prd
+```
+
