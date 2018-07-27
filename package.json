@@ -72,6 +72,8 @@
   "scripts": {
     "build": "cross-env NODE_ENV=production node build/build.js",
     "dev": "nodemon ./bin/www & gulp watch",
+    "react": "nodemon ./bin/www & gulp watch --entry React",
+    "vue": "nodemon ./bin/www & gulp watch --entry Vue",
     "start": "cross-env NODE_ENV=production node bin/www"
   },
   "repository": {

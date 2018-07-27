@@ -1,32 +1,5 @@
 #!/usr/bin/env node
 
-require('babel-register')({
-  presets: [
-    ['env', {
-      targets: {
-        node: '8',
-      },
-    }],
-    'react',
-    'stage-2',
-  ],
-  plugins: [
-    [
-      'transform-runtime',
-      {
-        polyfill: false,
-        regenerator: true,
-      },
-    ],
-    [
-      'babel-plugin-transform-require-ignore', {
-        extensions: ['.css', '.less', '.sass', '.scss'],
-      },
-    ],
-  ],
-  extensions: ['.jsx', '.js'],
-});
-
 const path = require('path');
 const Maius = require('maius');
 

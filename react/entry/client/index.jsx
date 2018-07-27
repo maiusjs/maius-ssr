@@ -12,8 +12,8 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
 
-import reducer from '../common/reducers';
-import App from '../common/App';
+import reducer from '../../reducers';
+import App from '../../App';
 
 // 通过服务端注入的全局变量得到初始的 state
 const preloadedState = window.__INITIAL_STATE_;

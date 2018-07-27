@@ -1,30 +1,9 @@
 const path = require('path');
-const chalk = require('chalk');
 const devMode = process.env.NODE_ENV !== 'production';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
-
-const entrys = ['React', 'Vue'];
-const entryCol = {
-  React: path.resolve(__dirname, '../react/entry/client/index.jsx'),
-  Vue: '',
-};
-let entry;
-
-for (let i = 0; i < process.argv.length; i++) {
-  const str = process.argv[i];
-  if (str === '--entry') {
-    entry = process.argv[i + 1];
-  }
-}
-
-if (entrys.indexOf(entry) < 0) {
-  entry = entrys[0];
-}
-
-console.log(chalk.yellow(`
-  Starting ${entry} SSR...
-`));
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const postcssOpts = {
   ident: 'postcss',
@@ -45,8 +24,18 @@ const postcssOpts = {
 };
 
 const config = {
+  mode: 'production',
+
+  output: {
+    path: path.resolve(__dirname, '../server/public'),
+    filename: 'js/[name].js',
+    publicPath: '/',
+    chunkFilename: 'js/[name].js',
+    libraryTarget: 'commonjs2',
+  },
+
   entry: {
-    app: entryCol[entry],
+    render: path.resolve(__dirname, '../server/utils/render.jsx'),
   },
 
   resolve: {
@@ -150,6 +139,7 @@ const config = {
       filename: 'css/style.css',
       chunkFilename: 'css/[name].css',
     }),
+    new UglifyJSPlugin(),
   ],
 };
 

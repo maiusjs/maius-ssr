@@ -1,17 +1,16 @@
 const _ = require('lodash');
 const { Controller } = require('maius');
 const { createStore, applyMiddleware } = require('redux');
-const renderStaticHtml = require('../utils/render').default;
 const thunk = require('redux-thunk').default;
-const reducer = require('../../common/reducers').default;
+const { renderToString, reducers } = require('../../react/entry/server');
 
 module.exports = class ViewsController extends Controller {
   async base(ctx, next) {
     const context = {};
     // 在服务端创建 Redux Store
-    const store = createStore(reducer, ctx.reactState || {}, applyMiddleware(thunk));
+    const store = createStore(reducers, ctx.reactState || {}, applyMiddleware(thunk));
     // 生成 html 字符串
-    const content = renderStaticHtml({ ctx, store, context });
+    const content = renderToString({ ctx, store, context });
     // 从 Store 中获取 State 对象
     const preloadedState = store.getState();
 
