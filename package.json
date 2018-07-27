@@ -39,6 +39,7 @@
     "less-loader": "^4.0.6",
     "lodash": "^4.17.10",
     "maius": "^0.0.3",
+    "mini-css-extract-plugin": "^0.4.1",
     "node-notifier": "^5.2.1",
     "node-sass": "^4.8.3",
     "opn": "^5.2.0",
@@ -69,7 +70,9 @@
     "nodemon": "^1.8.1"
   },
   "scripts": {
-    "dev": "nodemon ./bin/www & gulp watch"
+    "build": "cross-env NODE_ENV=production node build/build.js",
+    "dev": "nodemon ./bin/www & gulp watch",
+    "start": "cross-env NODE_ENV=production node bin/www"
   },
   "repository": {
     "type": "git",
