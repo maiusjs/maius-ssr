@@ -4,6 +4,8 @@ const { createStore, applyMiddleware } = require('redux');
 const thunk = require('redux-thunk').default;
 const { renderToString, reducers } = require('../../react/entry/server');
 
+const vueRenderToString = require('../../vue/entry/server').renderToString;
+
 module.exports = class ViewsController extends Controller {
   async base(ctx, next) {
     const context = {};
@@ -20,6 +22,19 @@ module.exports = class ViewsController extends Controller {
       NODE_ENV: process.env.NODE_ENV,
       html: content,
       state: JSON.stringify(preloadedState),
+    });
+
+    await next();
+  }
+
+  async vue(ctx, next) {
+    const content = await vueRenderToString();
+
+    await ctx.render('index', {
+      title: 'Vue Isomorphic',
+      NODE_ENV: process.env.NODE_ENV,
+      html: content,
+      state: JSON.stringify({}),
     });
 
     await next();

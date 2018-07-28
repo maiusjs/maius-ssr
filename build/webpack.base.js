@@ -3,20 +3,15 @@ const chalk = require('chalk');
 const devMode = process.env.NODE_ENV !== 'production';
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
+const argv = require('../utils/argv');
 
 const entrys = ['React', 'Vue'];
 const entryCol = {
-  React: path.resolve(__dirname, '../react/entry/client/index.jsx'),
-  Vue: '',
+  React: path.resolve(__dirname, '../react/entry/client'),
+  Vue: path.resolve(__dirname, '../vue/entry/client'),
 };
-let entry;
 
-for (let i = 0; i < process.argv.length; i++) {
-  const str = process.argv[i];
-  if (str === '--entry') {
-    entry = process.argv[i + 1];
-  }
-}
+let entry = argv(process.argv, '--entry');
 
 if (entrys.indexOf(entry) < 0) {
   entry = entrys[0];
@@ -70,6 +65,10 @@ const config = {
           ],
         },
       },
+      // {
+        // test: /\.vue$/,
+        // use: ['vue-loader'],
+      // },
       {
         test: /\.css$/,
         use: [
